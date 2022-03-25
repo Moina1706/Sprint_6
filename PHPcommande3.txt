@@ -1,0 +1,200 @@
+  828  git push 
+  829  cd ..
+  830  cd Sprint_04Fabien/
+  831  git clone https://github.com/frozar/dwwm_2021_sprint_04.git
+  832  git status
+  833  git pull 
+  834  ls
+  835  cd dwwm_2021_sprint_04/
+  836  ls
+  837  cd ..
+  838  cd Sprint_04
+  839  ls
+  840  git add day_01
+  841  git commit
+  842  git push
+  843  ls
+  844  de Documents/
+  845  cd Documents/
+  846  ls
+  847  cd EXO1/
+  848  ls
+  849  cd Sprint_04Fabien
+  850  ls
+  851  cd dwwm_2021_sprint_04/
+  852  ls
+  853  cd ..*
+  854  git status
+  855  git pull https://github.com/frozar/dwwm_2021_sprint_04.git
+  856  ls
+  857  git clone https://github.com/frozar/dwwm_2021_sprint_04.git
+  858  cd ..
+  859  cd Sprint_04
+  860  ls
+  861  git status
+  862  ls
+  863  git add day_01 
+  864  git commit
+  865  git push 
+  866  cd Do
+  867  cd Documents/
+  868  ls
+  869  cd EXO1/
+  870  ls
+  871  cd Sprint_04
+  872  ls
+  873  git add day_01
+  874  git add day_02
+  875  git commit
+  876  git push 
+  877  it push
+  878  git push
+  879  ls
+  880  git add day_2
+  881  git add day_02
+  882  git commit
+  883  git push
+  884  ls
+  885  commit add day_02
+  886  git add day_02
+  887  git commit 
+  888  git push
+  889  ls
+  890  git add day_03
+  891  git commit
+  892  git push
+  893  ls
+  894  cd ..
+  895  cd Sprint_05
+  896  ls
+  897  git status
+  898  ls
+  899  git add rest-countries/
+  900  git commit
+  901  git push 
+  902  git status
+  903  ls
+  904  git add rest-countries/
+  905  git commit -A
+  906  git commit -a
+  907  git push
+  908  git init
+  909  git remote add origin https://github.com/Moina1706/Sprint_05.git
+  910  git branch -M main
+  911  git branch -M master
+  912  git branch -M main
+  913  git push -u origin main
+  914  ls
+  915  git status
+  916  git add rest-countries/
+  917  git commit
+  918  git status 
+  919  git push 
+  920  git push --set-upstream origin master
+  921  ls
+  922  ipconfig
+  923  ping 127.0.0.1
+  924  snmp
+  925  ls
+  926  cd Documents/
+  927  ls
+  928  cd SPRINT/
+  929  ls
+  930  cd Sprint_05
+  931  ls
+  932  git status
+  933  git add rest-countries/
+  934  git commit
+  935  git push 
+  936  git add rest-countries/
+  937  git commit
+  938  git push 
+  939  cd
+  940  sudo apt install apache2 php libapache2-mod-php mysql-server php-mysql
+  941  sudo apache2ctl -v
+  942  sudo apache2ctl -t
+  943  php -i
+  944  php -r phpinfo();
+  945  php -r "phpinfo\(\);"
+  946  php -r phpinfo()
+  947  php -r phpinfo
+  948  php -i
+  949  sudo ufw allow "Apache Full"
+  950  sudo ufw app info "Apache Full"
+  951  ls
+  952  cd /etc
+  953  ls
+  954  cd php/
+  955  ls
+  956  cd 7.4/
+  957  ls
+  958  cd..
+  959  cd ..
+  960  ls
+  961  cd apache2/
+  962  ls
+  963  cd sites-available/
+  964  ls
+  965  cat default-ssl.conf 
+  966  ls
+  967  cat 000-default.conf 
+  968  ll
+  969  pwd
+  970  xed
+  971  ls
+  972  sudo xed 000-default.conf 
+  973  cat 000-default.conf 
+  974  ls
+  975  sudo a2dissite 000-default.conf && sudo a2ensite 000-default.conf && sudo systemctl reload apache2
+  976  ls /Documents/SPRINT/Sprint_06
+  977  ls ../Documents/SPRINT/Sprint_06
+  978  ls /home/moina1706/Documents/SPRINT/Sprint_06
+  979  sudo xed 000-default.conf 
+  980  sudo a2dissite 000-default.conf && sudo a2ensite 000-default.conf && sudo systemctl reload apache2
+  981  cat 000-default.conf 
+  982  ll /var/log/apache2/
+  983  ll /var/log/
+  984  ls
+  985  ll
+  986  cat 000-default.conf 
+  987  sudo usermod -a -G adm moina1706
+  988  groups
+  989  groups 
+  990  cd /etc/
+  991  ls
+  992  cd apache2/
+  993  ls
+  994  cd sites-available/
+  995  ls
+  996  cat 000-default.conf 
+  997  ll /var/log/apache2/
+  998  cat /var/log/apache2/access.log 
+  999  cat /var/log/apache2/error.log 
+ 1000  ls
+ 1001  cat 000-default.conf 
+ 1002  ll /home/moina1706/Documents/SPRINT/Sprint_06
+ 1003* 
+ 1004  cat /var/log/apache2/error.log 
+ 1005  cat 000-default.conf 
+ 1006  sudo xed 000-default.conf 
+ 1007  sudo a2dissite 000-default.conf && sudo a2ensite 000-default.conf && sudo systemctl reload apache2
+ 1008  cat /var/log/apache2/error.log 
+ 1009  sudo xed 000-default.conf 
+ 1010  sudo a2dissite 000-default.conf && sudo a2ensite 000-default.conf && sudo systemctl reload apache2
+ 1011  sudo xed 000-default.conf 
+ 1012  pwd
+ 1013  ls
+ 1014  sudo xed 000-default.conf 
+ 1015  sudo a2dissite 000-default.conf && sudo a2ensite 000-default.conf && sudo systemctl reload apache2
+ 1016  groups
+ 1017  php --version
+ 1018  sudo a2dissite 000-default.conf && sudo a2ensite 000-default.conf && sudo systemctl reload apache2
+ 1019  cat /etc/php/7.4/apache2/php.ini 
+ 1020  cat /etc/php/7.4/apache2/php.ini >> /home/moina1706/Documents/SPRINT/Sprint_06/PHPini.txt
+ 1021  xed /etc/php/7.4/apache2/php.ini 
+ 1022  sudo xed /etc/php/7.4/apache2/php.ini 
+ 1023  sudo a2dissite 000-default.conf && sudo a2ensite 000-default.conf && sudo systemctl reload apache2
+ 1024  history 200 >> /home/moina1706/Documents/SPRINT/Sprint_06/PHPcommande2.txt
+ 1025  history -200 >> /home/moina1706/Documents/SPRINT/Sprint_06/PHPcommande3.txt
+ 1026  history -1 -200 >> /home/moina1706/Documents/SPRINT/Sprint_06/PHPcommande3.txt
+ 1027  history |tail -200 >> /home/moina1706/Documents/SPRINT/Sprint_06/PHPcommande3.txt

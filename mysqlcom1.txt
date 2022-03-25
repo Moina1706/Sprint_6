@@ -1,0 +1,30 @@
+ 1020  cat /etc/php/7.4/apache2/php.ini >> /home/moina1706/Documents/SPRINT/Sprint_06/PHPini.txt
+ 1021  xed /etc/php/7.4/apache2/php.ini 
+ 1022  sudo xed /etc/php/7.4/apache2/php.ini 
+ 1023  sudo a2dissite 000-default.conf && sudo a2ensite 000-default.conf && sudo systemctl reload apache2
+ 1024  history 200 >> /home/moina1706/Documents/SPRINT/Sprint_06/PHPcommande2.txt
+ 1025  history -200 >> /home/moina1706/Documents/SPRINT/Sprint_06/PHPcommande3.txt
+ 1026  history -1 -200 >> /home/moina1706/Documents/SPRINT/Sprint_06/PHPcommande3.txt
+ 1027  history |tail -200 >> /home/moina1706/Documents/SPRINT/Sprint_06/PHPcommande3.txt
+ 1028  cd /home
+ 1029  ls
+ 1030  cd moina1706/
+ 1031  ls
+ 1032  cd Bureau/
+ 1033  ls
+ 1034  pwd
+ 1035  discord restart
+ 1036  discord stop
+ 1037  cd /etc
+ 1038  ls
+ 1039  ls >> /home/moina1706/Documents/SPRINT/Sprint_06/lsetc.txt
+ 1040  mysql --version
+ 1041  mysql -u root
+ 1042  mysql -u moina1706
+ 1043  sudo mysql -u root
+ 1044  mysql -u moina1706
+ 1045  mysql -u moina1706 -p
+ 1046  mysql -u root -p
+ 1047  sudo mysql -u root
+ 1048  mysql -u moina1706 -p
+ 1049  history |tail -30 >> /home/moina1706/Documents/SPRINT/Sprint_06/mysqlcom1.txt
