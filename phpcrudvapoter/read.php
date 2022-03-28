@@ -29,6 +29,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 $prixachat = $row["prixachat"];
                 $prixvente = $row["prixvente"];
                 $quantite = $row["quantite"];
+                $type = $row["type"];
             } else{
                 // Si pas de id correct retourne la page d'erreur
                 header("location: error.php");
@@ -66,6 +67,10 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     </style>
 </head>
 <body>
+
+<div class="menu">
+<?php include 'header.php';?>
+</div>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -96,6 +101,11 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                     <div class="form-group">
                         <label>Quantite</label>
                         <p><b><?php echo $row["quantite"]; ?></b></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Type</label>
+                        <p><b><?php echo $row["type"]; ?></b></p>
                     </div>
                     <p><a href="index.php" class="btn btn-primary">Retour</a></p>
                 </div>

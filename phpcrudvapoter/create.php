@@ -3,27 +3,18 @@
 require_once "config.php";
  
 // Definir les variables
-$reference = $nom = $description = $prixachat = $prixvente = $quantite = "";
-$reference_err = $name_err = $description_err = $prixachat_err = $prixvente_err = $quantite_err = "";
+$reference = $nom = $description = $prixachat = $prixvente = $quantite = $type="";
+$reference_err = $name_err = $description_err = $prixachat_err = $prixvente_err = $quantite_err = $type_err="";
  
 // Traitement
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    // / Validate reference
-    // $input_reference = trim($_POST["reference"]);
-    // if(empty($input_reference)){
-    //     $reference_err = "Veillez entrez la reference du produit.";
-    // } elseif(!filter_var($input_reference, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-    //     $reference_err = "Veillez entrez a valid reference.";
-    // } else{
-    //     $reference = $input_reference;
-    // }
 
 
 // Validate reference
 $input_reference = trim($_POST["reference"]);
 if(empty($input_reference)){
-    $reference_err = "Veillez entrez la reference du produit.";
+    $reference_err = "Veuillez entrez la reference du produit.";
 } else{
     $reference = $input_reference;
 }
@@ -31,7 +22,7 @@ if(empty($input_reference)){
     // Validate name
     $input_name = trim($_POST["nom"]);
     if(empty($input_name)){
-        $name_err = "Veillez entrez un nom.";
+        $name_err = "Veuillez entrez un nom.";
     } else{
         $nom = $input_name;
     }
@@ -39,7 +30,7 @@ if(empty($input_reference)){
     // Validate description
     $input_description = trim($_POST["description"]);
     if(empty($input_description)){
-        $description_err = "Veillez entrez une description.";     
+        $description_err = "Veuillez entrez une description.";     
     } else{
         $description = $input_description;
     }
@@ -47,9 +38,9 @@ if(empty($input_reference)){
     // Validate prixachat
     $input_prixachat = trim($_POST["prixachat"]);
     if(empty($input_prixachat)){
-        $prixachat_err = "Veillez entrez le prix d'achat.";
+        $prixachat_err = "Veuillez entrez le prix d'achat.";
      } elseif(!ctype_digit($input_prixachat)){
-            $prixachat_err = "Veillez entrez une valeur positive.";     
+            $prixachat_err = "Veuillez entrez une valeur positive.";     
     } else{
         $prixachat = $input_prixachat;
     }
@@ -57,9 +48,9 @@ if(empty($input_reference)){
     // Validate prix vente
     $input_prixvente = trim($_POST["prixvente"]);
     if(empty($input_prixvente)){
-        $prixvente_err = "Veillez entrez le prix de vente.";  
+        $prixvente_err = "Veuillez entrez le prix de vente.";  
      } elseif(!ctype_digit($input_prixvente)){
-            $prixvente_err = "Veillez entrez une valeur positive.";   
+            $prixvente_err = "Veuillez entrez une valeur positive.";   
     } else{
         $prixvente = $input_prixvente;
     }
@@ -67,21 +58,28 @@ if(empty($input_reference)){
     // Validate quantite
     $input_quantite = trim($_POST["quantite"]);
     if(empty($input_quantite)){
-        $quantite_err = "Veillez entrez les quantites.";     
+        $quantite_err = "Veuillez entrez les quantites.";     
     } elseif(!ctype_digit($input_quantite)){
-        $quantite_err = "Veillez entrez une valeur positive.";
+        $quantite_err = "Veuillez entrez une valeur positive.";
     } else{
         $quantite = $input_quantite;
     }
     
+// Validate Type de produit
+    $input_type = trim($_POST["type"]);
+    if(empty($input_type)){
+        $type_err = "Veuillez entrez un type.";     
+    } else{
+         $type = $input_type;
+    }
+
     // verifiez les erreurs avant enregistrement
-    if(empty($reference_err) && empty($name_err) && empty($description_err) && empty($prixachat_err) && empty($prixvente_err) && empty($quantite_err)){
-        echo "Je suis dans la boucle";
-        // Prepare an insert statement
-        $sql = "INSERT INTO vapfactory (reference, nom, description, prixachat, prixvente, quantite) VALUES (?, ?, ?, ?, ?, ?)";
+    if(empty($reference_err) && empty($name_err) && empty($description_err) && empty($prixachat_err) && empty($prixvente_err) && empty($quantite_err) && empty($type_err)){
+               // Prepare an insert statement
+        $sql = "INSERT INTO vapfactory (reference, nom, description, prixachat, prixvente, quantite, type) VALUES (?, ?, ?, ?, ?, ?,?)";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind les variables à la requette preparée
-            mysqli_stmt_bind_param($stmt, "sssddd", $param_reference, $param_nom, $param_description, $param_prixachat, $param_prixvente, $param_quantite);
+            mysqli_stmt_bind_param($stmt, "sssddds", $param_reference, $param_nom, $param_description, $param_prixachat, $param_prixvente, $param_quantite, $param_type);
             // Set parameters
             $param_reference =$reference;
             $param_nom = $nom;
@@ -89,7 +87,9 @@ if(empty($input_reference)){
             $param_prixachat = $prixachat;
             $param_prixvente = $prixvente;
             $param_quantite = $quantite;
+            $param_type=$type;
             
+           
             // executer la requette
             if(mysqli_stmt_execute($stmt)){
                 // opération effectuée, retour
@@ -124,6 +124,11 @@ if(empty($input_reference)){
     </style>
 </head>
 <body>
+
+<div class="menu">
+<?php include 'header.php';?>
+</div>
+
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -131,18 +136,21 @@ if(empty($input_reference)){
                     <h2 class="mt-5">Ajouter un produit Vap Factory</h2>
                     <p>Remplir le formulaire pour ajouter les produits du stock de Vape Electronique</p>
 
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                    
 
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="cigarette" value="ci" Default checked>
-                        <label class="form-check-label" for="inlineRadio1">Cigarettes électroniques </label>
+                        <input class="form-check-input" type="radio" name="type" id="cigarette" value="Vapoteuses" checked>
+                        <label class="form-check-label" for="inlineRadio1">Vapoteuses </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="liquide" value="li">
+                        <input class="form-check-input" type="radio" name="type" id="liquide" value="E-Liquides">
                         <label class="form-check-label" for="inlineRadio2">E-liquides</label>
                     </div>
 
+                    
+
+                                
 
                     <div class="form-group">
                             <label>Reference</label>
@@ -161,7 +169,7 @@ if(empty($input_reference)){
                         </div>
                         <div class="form-group">
                             <label>Prix achat</label>
-                            <input type="number" name="prixachat" class="form-control <?php echo (!empty($prixachat_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $prixachat; ?>">
+                            <input type="number" step="any" name="prixachat" class="form-control <?php echo (!empty($prixachat_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $prixachat; ?>">
                             <span class="invalid-feedback"><?php echo $prixachat_err;?></span>
                         </div>
 
@@ -179,6 +187,9 @@ if(empty($input_reference)){
                         <br>
                         <input type="submit" class="btn btn-primary" value="Enregistrer">
                         <a href="index.php" class="btn btn-secondary ml-2">Annuler</a>
+
+                        
+
                     </form>
                 </div>
             </div>        

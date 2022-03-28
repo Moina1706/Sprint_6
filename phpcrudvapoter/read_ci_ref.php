@@ -38,7 +38,7 @@
                     require_once "config.php";
                     
                     // select query execution
-                    $sql = "SELECT * FROM vapfactory";
+                    $sql = "SELECT * FROM vapfactory WHERE type ='Vapoteuses'ORDER BY reference ASC";
                     
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){

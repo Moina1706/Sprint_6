@@ -19,6 +19,11 @@
 </head>
 <body>
 
+<?php 
+// recuperation de la reference
+$search =  $_POST["search_ref"];
+ ?>
+
 <div class="menu">
 <?php include 'header.php';?>
 </div>
@@ -38,7 +43,7 @@
                     require_once "config.php";
                     
                     // select query execution
-                    $sql = "SELECT * FROM vapfactory";
+                    $sql = "SELECT * FROM vapfactory WHERE reference ='$search'";
                     
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
@@ -82,7 +87,7 @@
                             echo '<div class="alert alert-danger"><em>Pas d\'enregistrement</em></div>';
                         }
                     } else{
-                        echo "Oops! Une erreur est survenue";
+                        echo "Cette réference n'existe pas, vous pouvez la céer";
                     }
  
                     // Fermer connection
@@ -94,3 +99,13 @@
     </div>
 </body>
 </html>
+
+
+
+
+
+
+
+<!-- Welcome <?php echo $_POST["search_ref"]; ?><br>
+La reference est la suivante: <?php echo $_POST["search_ref"]; ?> -->
+

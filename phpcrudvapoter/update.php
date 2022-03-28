@@ -173,6 +173,10 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     </style>
 </head>
 <body>
+
+<div class="menu">
+<?php include 'header.php';?>
+</div>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
