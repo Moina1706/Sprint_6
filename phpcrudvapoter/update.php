@@ -3,8 +3,8 @@
 require_once "config.php";
  
 // Definir les variables
-$reference = $nom = $description = $prixachat = $prixvente = $quantite = "";
-$reference_err = $name_err = $description_err =  $prixachat_err = $prixvente_err = $quantite_err = "";
+$reference = $nom = $description = $prixachat = $prixvente = $quantite = $type="";
+$reference_err = $name_err = $description_err =  $prixachat_err = $prixvente_err = $quantite_err = $type_err= "";
 
  
 // verifier la valeur id dans le post pour la mise à jour
@@ -15,7 +15,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Validate reference
     $input_reference = trim($_POST["reference"]);
     if(empty($input_reference)){
-        $reference_err = "Veillez entrez une reference.";
+        $reference_err = "Veuillez entrez une reference.";
        } else{
         $reference = $input_reference;
     }
@@ -24,9 +24,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Validate name
     $input_name = trim($_POST["nom"]);
     if(empty($input_name)){
-        $name_err = "Veillez entrez un nom.";
+        $name_err = "Veuillez entrez un nom.";
     } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-        $name_err = "Veillez entrez a valid name.";
+        $name_err = "Veuillez entrez a valid name.";
     } else{
         $nom = $input_name;
     }
@@ -34,7 +34,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Validate description
     $input_description = trim($_POST["description"]);
     if(empty($input_description)){
-        $description_err = "Veillez entrez la description.";     
+        $description_err = "Veuillez entrez la description.";     
     } else{
         $description= $input_description;
     }
@@ -42,9 +42,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Validate prix achat
     $input_prixachat = trim($_POST["prixachat"]);
     if(empty($input_prixachat)){
-        $prixachat_err = "Veillez entrez le prix d'achat.";
+        $prixachat_err = "Veuillez entrez le prix d'achat.";
     } elseif(!ctype_digit($input_prixachat)){
-        $prixachat_err = "Veillez entrez une valeur positive.";
+        $prixachat_err = "Veuillez entrez une valeur positive.";
     } else{
         $prixachat = $input_prixachat;
     }
@@ -52,9 +52,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Validate prix vente
     $input_prixvente = trim($_POST["prixvente"]);
     if(empty($input_prixvente)){
-        $prixvente_err = "Veillez entrez le prix de vente.";
+        $prixvente_err = "Veuillez entrez le prix de vente.";
     } elseif(!ctype_digit($input_prixvente)){
-        $prixvente_err = "Veillez entrez une valeur positive.";
+        $prixvente_err = "Veuillez entrez une valeur positive.";
     } else{
         $prixvente = $input_prixvente;
     }
@@ -63,21 +63,29 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Validate quantite
     $input_quantite = trim($_POST["quantite"]);
     if(empty($input_quantite)){
-        $quantite_err = "Veillez entrez la quantite.";     
+        $quantite_err = "Veuillez entrez la quantite.";     
     } elseif(!ctype_digit($input_quantite)){
-        $quantite_err = "Veillez entrez une valeur positive.";
+        $quantite_err = "Veuillez entrez une valeur positive.";
     } else{
         $quantite = $input_quantite;
     }
     
+    // Validate Type de produit
+    $input_type = $_POST["type"];
+    if(empty($input_type)){
+        $type_err = "Veuillez entrez un type.";     
+    } else{
+        $type = $input_type;
+    }
+
     // verifier les erreurs avant modification
-    if(empty($reference_err) && empty($name_err) && empty($description_err) && empty($prixachat_err) && empty($prixvente_err)&& empty($quantite_err)){
+    if(empty($reference_err) && empty($name_err) && empty($description_err) && empty($prixachat_err) && empty($prixvente_err)&& empty($quantite_err) && empty($type_err)){
         // Prepare an update statement
-        $sql = "UPDATE vapfactory SET reference=?, nom=?, description=?, prixachat=?, prixvente=?, quantite=? WHERE id=?";
+        $sql = "UPDATE vapfactory SET reference=?, nom=?, description=?, prixachat=?, prixvente=?, quantite=?, type=? WHERE id=?";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind les variables
-            mysqli_stmt_bind_param($stmt, "sssdddi", $param_reference, $param_nom, $param_description, $param_prixachat, $param_prixvente, $param_quantite, $param_id);
+            mysqli_stmt_bind_param($stmt, "sssdddsi", $param_reference, $param_nom, $param_description, $param_prixachat, $param_prixvente, $param_quantite, $param_type, $param_id);
             
             // Set parameters
             $param_reference=$reference;
@@ -86,6 +94,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $param_prixachat = $prixachat;
             $param_prixvente = $prixvente;
             $param_quantite = $quantite;
+            $param_type = $type;
             $param_id = $id;
             
             // executer
@@ -135,6 +144,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     $prixachat = $row["prixachat"];
                     $prixvente = $row["prixvente"];
                     $quantite = $row["quantite"];
+                    $type=$row["type"];
                 } else{
                     // pas de id parametter valid, retourne erreur
                     header("location: error.php");
@@ -181,9 +191,24 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5">Mise à jour de l'enregistremnt</h2>
+                    <h2 class="mt-5">Mise à jour de l'enregistrement</h2>
                     <p>Modifier les champs et enregistrer</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
+                   
+                    
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" value="Vapoteuses" <?php if($type == 'Vapoteuses') echo 'checked="checked" ';?>>
+                        <label class="form-check-label" for="inlineRadio1">Vapoteuses </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="type" value="E-Liquides" <?php if($type== 'E-Liquides') echo 'checked="checked" ';?>>
+                        <label class="form-check-label" for="inlineRadio2">E-liquides</label>
+                    </div>
+<!--    <input type="radio" name="q1" value="A" <?php //if(isset($_POST['type']) && ($_POST['type'] == 'E-Liquides')) echo 'checked="checked" ';?>/>
+  A. <br />-->
+
+
+
 
                     <div class="form-group">
                             <label>Reference</label>
