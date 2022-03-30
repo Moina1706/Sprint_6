@@ -204,9 +204,6 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                         <input class="form-check-input" type="radio" name="type" value="E-Liquides" <?php if($type== 'E-Liquides') echo 'checked="checked" ';?>>
                         <label class="form-check-label" for="inlineRadio2">E-liquides</label>
                     </div>
-<!--    <input type="radio" name="q1" value="A" <?php //if(isset($_POST['type']) && ($_POST['type'] == 'E-Liquides')) echo 'checked="checked" ';?>/>
-  A. <br />-->
-
 
 
 
